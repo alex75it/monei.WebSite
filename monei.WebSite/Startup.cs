@@ -23,6 +23,13 @@ namespace SpikeWebAngular
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            // setup for IIS
+            // ref: https://docs.microsoft.com/en-us/aspnet/core/publishing/iis?tabs=aspnetcore2x
+            services.Configure<IISOptions>(options => {
+                options.AutomaticAuthentication = false; // do not use Windows Authentication
+                options.AuthenticationDisplayName = null; 
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
